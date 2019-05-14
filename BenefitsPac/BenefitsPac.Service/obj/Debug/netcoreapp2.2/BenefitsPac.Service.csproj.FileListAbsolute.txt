@@ -1,0 +1,6 @@
+C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\bin\Debug\netcoreapp2.2\BenefitsPac.Core.dll
+C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\bin\Debug\netcoreapp2.2\BenefitsPac.DataAccess.dll
+C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\obj\Debug\netcoreapp2.2\BenefitsPac.Service.csprojAssemblyReference.cache
+C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\obj\Debug\netcoreapp2.2\BenefitsPac.Service.csproj.CoreCompileInputs.cache
+C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\obj\Debug\netcoreapp2.2\BenefitsPac.Service.AssemblyInfoInputs.cache
+C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\obj\Debug\netcoreapp2.2\BenefitsPac.Service.AssemblyInfo.cs
