@@ -22,14 +22,6 @@ namespace BenefitsPac.Controllers
             return Ok(dependent);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get()
-        {
-            IEnumerable<object> dependents = await _employeeService.GetAll();
-
-            return Ok(dependents);
-        }
-
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] object dependent)
         {

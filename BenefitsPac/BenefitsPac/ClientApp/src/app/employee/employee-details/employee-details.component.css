@@ -1,0 +1,9 @@
+.employee-detail-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .employee-detail-container > * {
+    width: 100%;
+  }
+  

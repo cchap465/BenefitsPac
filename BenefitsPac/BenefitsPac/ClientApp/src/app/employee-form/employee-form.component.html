@@ -1,0 +1,33 @@
+<form *ngIf="employee | async; else loading" [formGroup]="dependentForm"> 
+    <mat-card>
+<input matInput placeholder="Enter Employee's Name" formControlName="employeeName" required>  
+    </mat-card>   
+    <mat-card>
+          <mat-checkbox formControlName="hasDependents" class = "example-margin" > 
+           Include Dependents? 
+          </mat-checkbox>
+  <div *ngIf="dependentForm.controls.hasDependents.value" formArrayName="dependents">
+      <div *ngFor="let dependent of dependentForm?.controls.dependents?.controls; let i=index">
+        <div *ngIf="dependentForm?.controls.dependents?.controls.length > 1 && i > 0" ></div><br>
+        <div [formGroupName]="i">
+          <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="center">
+              <input matInput placeholder="Enter Dependent's Name" formControlName="dependentName" required>  
+              <button type="button" mat-mini-fab color="warn" fxFlex="nogrow" 
+              *ngIf="dependentForm.controls.dependents.controls.length > 1" (click)="removeDependent(i)">
+              Delete
+            </button>       
+            </div>
+            <mat-error *ngIf="dependent?.controls.dependentName.invalid">
+                Dependent's name is required.        
+            </mat-error>  
+          </div>
+        </div>
+      <br/>
+      <mat-card-actions>
+        <button type="button" mat-raised-button (click)="addDependent()">
+          Add new dependent
+        </button>
+      </mat-card-actions>
+      </div>
+    </mat-card>
+  </form>

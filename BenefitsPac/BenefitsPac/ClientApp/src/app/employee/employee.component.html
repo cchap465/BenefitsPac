@@ -1,0 +1,28 @@
+<h2>Employees</h2>
+  <input placeholder="Begin typing to filter list" matInput #input class="form-control" type="text"
+    (keyup)="applyFilter($event.target.value)"/>
+<mat-table #table [dataSource]="dataSource" matSort [hidden]="paginator.length == 0">
+    <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+    <mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></mat-row>
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> EMPLOYEE ID </mat-header-cell>
+    <mat-cell *matCellDef="let employee"> {{employee.id}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> EMPLOYEE NAME </mat-header-cell>
+    <mat-cell *matCellDef="let employee"> {{employee.employeeName}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="edit">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+    <mat-cell *matCellDef="let employee"><a routerLink="/employeeForm/{{employee?.id}}">Edit</a></mat-cell>
+  </ng-container>
+</mat-table>
+<div [hidden]="paginator.length > 0">
+  <tr>
+    No results found
+  </tr>
+</div>
+<mat-paginator
+[pageSize]="10"
+[pageSizeOptions]="[10, 25, 50]">  
+</mat-paginator>

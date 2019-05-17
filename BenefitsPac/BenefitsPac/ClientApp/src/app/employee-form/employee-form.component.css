@@ -1,0 +1,9 @@
+.dependent-detail-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .dependent-detail-container > * {
+    width: 100%;
+  }
+  
