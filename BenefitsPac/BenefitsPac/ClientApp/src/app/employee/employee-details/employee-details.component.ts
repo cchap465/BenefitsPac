@@ -1,9 +1,11 @@
+import { Dependent } from './../../shared/models/dependent';
 import { EmployeeService } from './../../shared/services/employee.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Employee } from 'src/app/shared/models/employee';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { EmployeeFormComponent } from 'src/app/employee-form/employee-form.component';
+import { DependentsService } from 'src/app/shared/services/dependents.service';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-employee-details',
@@ -11,14 +13,23 @@ import { EmployeeFormComponent } from 'src/app/employee-form/employee-form.compo
   styleUrls: ['./employee-details.component.css']
 })
 export class EmployeeDetailsComponent implements OnInit {
-  employee: Employee;
+  employee = new Employee();
+  dependent = new Dependent();
+  dependents: Dependent[];
+  filteredDependents: Dependent[];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  dataSource: MatTableDataSource<Dependent>;
+  columnsToDisplay = ['id', 'name', 'delete'];
 
   constructor(private route: ActivatedRoute,
     private employeeService: EmployeeService,
+    private dependentsService: DependentsService,
     private location: Location) { }
 
   ngOnInit() {
     this.getEmployee();
+    this.getDependents();
   }
 
   getEmployee(): void {
@@ -26,31 +37,57 @@ export class EmployeeDetailsComponent implements OnInit {
     this.employeeService.getEmployee(id)
       .subscribe(employee => {
         this.employee = employee;
-        /* this.employeeForm.get('hasDependents').valueChanges.subscribe(
-          value => this.addDependentValidation(value)
-        ); */
+    });
+  }
+
+  getDependents():void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.dependentsService.getDependentsByEmployeeId(id)
+      .subscribe(dependents => {
+        this.dependents = dependents;
+        this.dataSource = new MatTableDataSource(this.dependents);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+    });
+  }
+
+  saveEmployee(name: string): void {
+    this.employee.employeeName = name;
+    this.employeeService.updateEmployee(this.employee)
+      .subscribe();
+  }
+
+  addDependent(name: string): void {
+    this.dependent.name = name;
+    this.dependentsService.addDependent(name, this.employee.id)
+      .subscribe(dependent => {
+        this.dependents.push({ id: dependent.id, name: name, employeeId: this.employee.id })
+        this.setTableData();
       });
   }
 
-  save(): void {
-    this.employeeService.updateEmployee(this.employee)
-      .subscribe(() => this.goBack());
+  deleteDependent(id: number): void {
+    this.dependentsService.deleteDependent(id)
+      .subscribe(dependent => {
+        this.dependents = this.dependents.filter( h => h.id !== id);
+        this.setTableData();
+      });
   }
 
-  goBack(): void {
-    this.location.back();
-  }
-
-
-  /* addDependentValidation(hasDependents: boolean): void {
-    const hasDependentsControl = this.employeeForm.get('hasDe');
-    if(hasDependents) {
-      hasDependentsControl.setValidators(Validators.required);
-    } else {
-      hasDependentsControl.clearValidators();
+  applyFilter(value: string) {
+    this.dataSource.filter = value.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
+  }
 
-    hasDependentsControl.updateValueAndValidity();
-  } */
+  focusInput(input) {
+    input.clear();
+  }
 
+  private setTableData() {
+    this.dataSource = new MatTableDataSource(this.dependents);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 }

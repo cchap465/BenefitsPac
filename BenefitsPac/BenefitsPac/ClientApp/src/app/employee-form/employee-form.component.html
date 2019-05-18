@@ -1,12 +1,12 @@
-<form *ngIf="employee | async; else loading" [formGroup]="dependentForm"> 
+<form [formGroup]="dependentForm"> 
     <mat-card>
-<input matInput placeholder="Enter Employee's Name" formControlName="employeeName" required>  
+      <input matInput placeholder="Enter Employee's Name" formControlName="employeeName" required>  
     </mat-card>   
     <mat-card>
-          <mat-checkbox formControlName="hasDependents" class = "example-margin" > 
+          <mat-checkbox formControlName="includeDependents" class = "example-margin" > 
            Include Dependents? 
           </mat-checkbox>
-  <div *ngIf="dependentForm.controls.hasDependents.value" formArrayName="dependents">
+  <div *ngIf="dependentForm.controls.includeDependents.value" formArrayName="dependents">
       <div *ngFor="let dependent of dependentForm?.controls.dependents?.controls; let i=index">
         <div *ngIf="dependentForm?.controls.dependents?.controls.length > 1 && i > 0" ></div><br>
         <div [formGroupName]="i">

@@ -9,7 +9,7 @@ import { EmployeeDetailsComponent } from './employee-details/employee-details.co
 import { HttpClientModule } from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { MatTableModule, MatPaginatorModule } from '@angular/material';
+import { MatTableModule, MatPaginatorModule, MatCardModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -21,7 +21,8 @@ import { MatTableModule, MatPaginatorModule } from '@angular/material';
     RouterModule,
     EmployeeFormModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatCardModule
   ],
   declarations: [
     EmployeeComponent,

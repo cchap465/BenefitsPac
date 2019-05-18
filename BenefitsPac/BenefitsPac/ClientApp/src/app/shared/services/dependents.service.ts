@@ -18,10 +18,10 @@ export class DependentsService {
   constructor(
     private http: HttpClient) { }
 
-    getDependents(): Observable<Dependent[]> {
+    getDependentsByEmployeeId(employeeId: number): Observable<Dependent[]> {
       return this.http.get<Dependent[]>(this.dependentUrl)
-      .pipe(
-        tap(_ => console.log('fetched dependents')),
+      .pipe( 
+        tap(_ => _.find(x => x.employeeId === employeeId)),
         catchError(this.handleError<Dependent[]>('getDependents', []))
       );
     }
@@ -35,10 +35,32 @@ getDependent(id: number): Observable<Dependent> {
   );
 }
 
+/** POST: update the hero on the server */
+addDependent (name: string, employeeId: number): Observable<any> {
+  var dependent = new Dependent()
+  {
+    name = name,
+    employeeId = employeeId
+  };
+  return this.http.post(this.dependentUrl, dependent, httpOptions).pipe(
+    tap(_ => console.log(`updated dependent id=${dependent.id}`)),
+    catchError(this.handleError<any>('updateDependent'))
+  );
+}
+
 /** PUT: update the hero on the server */
 updateDependent (dependent: Dependent): Observable<any> {
   return this.http.put(this.dependentUrl, dependent, httpOptions).pipe(
     tap(_ => console.log(`updated dependent id=${dependent.id}`)),
+    catchError(this.handleError<any>('updateDependent'))
+  );
+}
+
+/** PUT: update the hero on the server */
+deleteDependent (id: number): Observable<any> {
+  const url = `${this.dependentUrl}/${id}`;
+  return this.http.delete(url).pipe(
+    tap(_ => console.log(`updated dependent id=${id}`)),
     catchError(this.handleError<any>('updateDependent'))
   );
 }

@@ -14,7 +14,7 @@
   </ng-container>
   <ng-container matColumnDef="edit">
       <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
-    <mat-cell *matCellDef="let employee"><a routerLink="/employeeForm/{{employee?.id}}">Edit</a></mat-cell>
+    <mat-cell *matCellDef="let employee"><a routerLink="/employeeDetail/{{employee?.id}}">Edit</a></mat-cell>
   </ng-container>
 </mat-table>
 <div [hidden]="paginator.length > 0">

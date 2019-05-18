@@ -1,1 +1,47 @@
-<app-employee-form></app-employee-form>
+<mat-card>
+<h1>Employee</h1>
+<input placeholder="Please enter employee name" matInput [(ngModel)]="employee.employeeName" class="form-control" type="text"/>
+<button (click)="saveEmployee(employee.employeeName)">Save</button>
+<br/>
+<br/>
+<mat-card>
+<h3>Dependents</h3>
+<input placeholder="Please enter dependent name" matInput [(ngModel)]="dependent.name" class="form-control" type="text"/>
+<button (click)="addDependent(dependent.name)">Add Dependent</button>
+<br/>
+<br/>
+<mat-card>
+<input 
+placeholder="Begin typing to filter list" 
+matInput 
+#input class="form-control" 
+type="text"
+(keyup)="applyFilter($event.target.value)"/>  
+<mat-table #table [dataSource]="dataSource" matSort [hidden]="paginator.length == 0">
+    <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+    <mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></mat-row>
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> DEPENDENT ID </mat-header-cell>
+    <mat-cell *matCellDef="let dependent"> {{dependent.id}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> DEPENDENT NAME </mat-header-cell>
+    <mat-cell *matCellDef="let dependent"> {{dependent.name}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="delete">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+    <mat-cell *matCellDef="let dependent"><button (click)="deleteDependent(dependent.id)">Delete</button> </mat-cell>
+  </ng-container>
+</mat-table>
+<div [hidden]="paginator.length > 0">
+  <tr>
+    No dependents currently
+  </tr>
+</div>
+<mat-paginator
+[pageSize]="5"
+[pageSizeOptions]="[5, 10, 20]">  
+</mat-paginator>
+</mat-card>
+</mat-card>
+</mat-card>
