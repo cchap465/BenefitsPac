@@ -1,6 +1,6 @@
 import { Dependent } from "./dependent";
 
 export class Employee {
-    id: number;
+    employeeId: number;
     employeeName: string;
   }

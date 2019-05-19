@@ -1,6 +1,10 @@
 ﻿using BenefitsPac.Core.DataAccessAbstractions;
+using BenefitsPac.Core.Models;
+using BenefitsPac.Core.Models.ApiModel;
 using BenefitsPac.Core.ServiceAbstractions;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BenefitsPac.Service
@@ -14,19 +18,45 @@ namespace BenefitsPac.Service
             _dependentsRepository = dependentsRepository;
         }
 
-        public async Task<int> Create(object dependent)
+        public async Task<int> Create(DependentModel dependent)
         {
-            return await _dependentsRepository.Create(dependent);
+            try
+            {
+                decimal discount = dependent.DependentName.StartsWith("a", StringComparison.OrdinalIgnoreCase) ? .10m : 0;
+                return await _dependentsRepository.Create(new DependentDataModel(dependent, discount));
+            }
+            catch (System.Exception ex)
+            {
+
+                throw;
+            }
         }
 
-        public async Task<object> GetById(int id)
+        public async Task<IEnumerable<DependentModel>> GetByEmployeeId(int id)
         {
-            return await _dependentsRepository.GetById(id);
+            try
+            {
+                IEnumerable<DependentDataModel> dependentDataModels = await _dependentsRepository.GetByEmployeeId(id);
+                return dependentDataModels.Select(x => new DependentModel(x));
+            }
+            catch (System.Exception ex)
+            {
+
+                throw;
+            }
         }
 
-        public async Task<IEnumerable<object>> GetByEmployeeId(int id)
+        public async Task<int> Delete(int id)
         {
-            return await _dependentsRepository.GetByEmployeeId(id);
+            try
+            {
+                return await _dependentsRepository.Delete(id);
+            }
+            catch (System.Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }

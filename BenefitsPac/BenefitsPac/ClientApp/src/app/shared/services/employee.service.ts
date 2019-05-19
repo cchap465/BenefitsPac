@@ -12,34 +12,41 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class EmployeeService {
-  private employeeUrl = 'api/employees';
+  private employeeUrl = '/api/Employee';
 
 
   constructor(
     private http: HttpClient) { }
 
     getEmployees(): Observable<Employee[]> {
-      return this.http.get<Employee[]>(this.employeeUrl)
-      .pipe(
-        tap(_ => console.log('fetched employees')),
+      return this.http.get<Employee[]>(this.employeeUrl).pipe(
         catchError(this.handleError<Employee[]>('getEmployees', []))
       );
     }
 
-/** GET hero by id. Will 404 if id not found */
 getEmployee(id: number): Observable<Employee> {
   const url = `${this.employeeUrl}/${id}`;
   return this.http.get<Employee>(url).pipe(
-    tap(_ => console.log(`fetched hero id=${id}`)),
     catchError(this.handleError<Employee>(`getHero id=${id}`))
   );
 }
 
-/** PUT: update the hero on the server */
+createEmployee (employee: Employee): Observable<any> {
+  return this.http.post(this.employeeUrl, employee, httpOptions).pipe(
+    catchError(this.handleError<any>('updateHero'))
+  );
+}
+
 updateEmployee (employee: Employee): Observable<any> {
   return this.http.put(this.employeeUrl, employee, httpOptions).pipe(
-    tap(_ => console.log(`updated hero id=${employee.id}`)),
     catchError(this.handleError<any>('updateHero'))
+  );
+}
+
+deleteEmployee (id: number): Observable<any> {
+  const url = `${this.employeeUrl}/${id}`;
+  return this.http.delete(url).pipe(
+    catchError(this.handleError<any>('updateDependent'))
   );
 }
 

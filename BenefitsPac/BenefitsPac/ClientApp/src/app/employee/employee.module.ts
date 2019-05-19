@@ -1,7 +1,7 @@
-import { EmployeeFormModule } from './../employee-form/employee-form.module';
+import { BenefitsBreakdownComponent } from './../benefits-breakdown/benefits-breakdown.component';
+import { DependentsComponent } from './../dependents/dependents.component';
 import { AppModule } from './../app.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SearchModule } from './../search/search.module';
 import { EmployeeComponent } from './employee.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -15,11 +15,9 @@ import { MatTableModule, MatPaginatorModule, MatCardModule } from '@angular/mate
   imports: [
     CommonModule,
     HttpClientModule,
-    SearchModule,
     BrowserAnimationsModule,
     FormsModule,
     RouterModule,
-    EmployeeFormModule,
     MatTableModule,
     MatPaginatorModule,
     MatCardModule
@@ -27,6 +25,8 @@ import { MatTableModule, MatPaginatorModule, MatCardModule } from '@angular/mate
   declarations: [
     EmployeeComponent,
     EmployeeDetailsComponent,
+    DependentsComponent,
+    BenefitsBreakdownComponent
   ],
   providers: [Location]
 })

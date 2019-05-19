@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using BenefitsPac.Core.Models.ApiModel;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BenefitsPac.Core.ServiceAbstractions
 {
     public interface IEmployeeService
     {
-        Task<int> Create(object employee);
-        Task<object> GetById(int id);
-        Task<IEnumerable<object>> GetAll();
+        Task<int> Create(EmployeeModel employee);
+        Task<int> UpdateEmployeeName(int employeeId, string employeeName);
+        Task<EmployeeModel> GetById(int id);
+        Task<IEnumerable<EmployeeModel>> GetAll();
+        Task<int> Delete(int id);
     }
 }

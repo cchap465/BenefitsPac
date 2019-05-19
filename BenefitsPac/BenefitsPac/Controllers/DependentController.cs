@@ -1,10 +1,12 @@
-﻿using BenefitsPac.Core.ServiceAbstractions;
+﻿using BenefitsPac.Core.Models.ApiModel;
+using BenefitsPac.Core.ServiceAbstractions;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BenefitsPac.Controllers
 {
+    [Route("/api/Dependent")]
     public class DependentController : ControllerBase
     {
         private readonly IDependentsService _dependentsService;
@@ -14,20 +16,28 @@ namespace BenefitsPac.Controllers
             _dependentsService = dependentsService;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetDependentsByEmployeeId/{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var dependent = await _dependentsService.GetById(id);
+            IEnumerable<DependentModel> dependent = await _dependentsService.GetByEmployeeId(id);
 
             return Ok(dependent);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] object dependent)
+        public async Task<IActionResult> Create([FromBody] DependentModel dependentModel)
         {
-            var id = await _dependentsService.Create(dependent);
+            var newId = await _dependentsService.Create(dependentModel);
 
-            return Ok(id);
+            return Ok(newId);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            int returnedId = await _dependentsService.Delete(id);
+
+            return Ok(returnedId);
         }
     }
 }

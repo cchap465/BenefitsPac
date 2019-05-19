@@ -12,3 +12,5 @@ C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\bin\Debug\netcoreapp2.2\Bene
 C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\obj\Debug\netcoreapp2.2\BenefitsPac.Service.csproj.CopyComplete
 C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\obj\Debug\netcoreapp2.2\BenefitsPac.Service.dll
 C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\obj\Debug\netcoreapp2.2\BenefitsPac.Service.pdb
+C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\bin\Debug\netcoreapp2.2\BenefitsPac.Business.dll
+C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\bin\Debug\netcoreapp2.2\BenefitsPac.Business.pdb

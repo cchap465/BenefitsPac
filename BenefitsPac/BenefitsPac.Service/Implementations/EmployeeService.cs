@@ -1,32 +1,88 @@
 ﻿using BenefitsPac.Core.DataAccessAbstractions;
+using BenefitsPac.Core.Models;
+using BenefitsPac.Core.Models.ApiModel;
 using BenefitsPac.Core.ServiceAbstractions;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BenefitsPac.Service
 {
     public class EmployeeService : IEmployeeService
     {
-        private readonly IEmployeeRepository _employeeRepository;
+        private readonly IEmployeeRepository employeeRepository;
 
         public EmployeeService(IEmployeeRepository employeeRepository)
         {
-            _employeeRepository = employeeRepository;
+            this.employeeRepository = employeeRepository;
         }
 
-        public async Task<IEnumerable<object>> GetAll()
+        public async Task<int> Create(EmployeeModel employee)
         {
-            return await _employeeRepository.GetAll();
+            try
+            {
+                decimal discount = employee.EmployeeName.StartsWith("a", StringComparison.OrdinalIgnoreCase) ? .10m : 0;
+                return await employeeRepository.Create(new EmployeeDataModel(employee, discount));
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
-        public async Task<int> Create(object employee)
+        public async Task<int> UpdateEmployeeName(int employeeId, string employeeName)
         {
-            return await _employeeRepository.Create(employee);
+            try
+            {
+                return await employeeRepository.Update(employeeId, employeeName);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public async Task<object> GetById(int id)
+        public async Task<int> Delete(int id)
         {
-            return await _employeeRepository.GetById(id);
+            try
+            {
+                return await employeeRepository.Delete(id);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<EmployeeModel> GetById(int id)
+        {
+            try
+            {
+                EmployeeDataModel employeeDataModel = await employeeRepository.GetById(id);
+                return new EmployeeModel(employeeDataModel);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<IEnumerable<EmployeeModel>> GetAll()
+        {
+            try
+            {
+                IEnumerable<EmployeeDataModel> employeeDataModels = await employeeRepository.GetAll();
+                return employeeDataModels.Select(x => new EmployeeModel(x));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }

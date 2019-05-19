@@ -1,8 +1,8 @@
+import { Dependent } from './../models/dependent';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
-import { Dependent } from '../models/dependent';
+import { catchError, tap } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -12,14 +12,13 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class DependentsService {
-  private dependentUrl = 'api/dependents';
+  private dependentUrl = '/api/Dependent';
 
 
-  constructor(
-    private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
     getDependentsByEmployeeId(employeeId: number): Observable<Dependent[]> {
-      return this.http.get<Dependent[]>(this.dependentUrl)
+      return this.http.get<Dependent[]>(`${this.dependentUrl}/GetDependentsByEmployeeId/${employeeId}`)
       .pipe( 
         tap(_ => _.find(x => x.employeeId === employeeId)),
         catchError(this.handleError<Dependent[]>('getDependents', []))
@@ -36,14 +35,9 @@ getDependent(id: number): Observable<Dependent> {
 }
 
 /** POST: update the hero on the server */
-addDependent (name: string, employeeId: number): Observable<any> {
-  var dependent = new Dependent()
-  {
-    name = name,
-    employeeId = employeeId
-  };
+addDependent (dependent: Dependent): Observable<number> {
   return this.http.post(this.dependentUrl, dependent, httpOptions).pipe(
-    tap(_ => console.log(`updated dependent id=${dependent.id}`)),
+    tap(_ => console.log(`updated dependent id=${dependent.dependentId}`)),
     catchError(this.handleError<any>('updateDependent'))
   );
 }
@@ -51,7 +45,7 @@ addDependent (name: string, employeeId: number): Observable<any> {
 /** PUT: update the hero on the server */
 updateDependent (dependent: Dependent): Observable<any> {
   return this.http.put(this.dependentUrl, dependent, httpOptions).pipe(
-    tap(_ => console.log(`updated dependent id=${dependent.id}`)),
+    tap(_ => console.log(`updated dependent id=${dependent.dependentId}`)),
     catchError(this.handleError<any>('updateDependent'))
   );
 }

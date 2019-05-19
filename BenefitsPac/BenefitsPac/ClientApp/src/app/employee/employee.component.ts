@@ -1,6 +1,5 @@
 import { EmployeeService } from './../shared/services/employee.service';
-import { Dependent } from '../shared/models/dependent';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Employee } from '../shared/models/employee';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
@@ -16,22 +15,28 @@ export class EmployeeComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<Employee>;
-  columnsToDisplay = ['id', 'name', 'edit'];
+  columnsToDisplay = ['id', 'name', 'edit', 'delete', 'benefitsBreakdown'];
 
-  constructor(private employeeService: EmployeeService) { }
+  constructor(private employeeService: EmployeeService,
+    private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.getEmployees();
-  }
+   }
 
   getEmployees(): void {
     this.employeeService.getEmployees()
     .subscribe(employees => {
       this.employees = employees;
-      this.dataSource = new MatTableDataSource(this.employees);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      console.log(employees);
+      this.setDataSource();
+    });
+  }
+
+  deleteEmployee(id: number): void {
+    this.employeeService.deleteEmployee(id)
+    .subscribe(() => {
+      this.employees = this.employees.filter( h => h.employeeId !== id);
+      this.setDataSource();
     });
   }
 
@@ -42,7 +47,10 @@ export class EmployeeComponent implements OnInit {
     }
   }
 
-  focusInput(input) {
-    input.clear();
+  private setDataSource() {
+    this.dataSource = new MatTableDataSource(this.employees);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
   }
+
 }
