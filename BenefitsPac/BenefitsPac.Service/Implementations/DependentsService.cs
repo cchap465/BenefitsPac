@@ -25,8 +25,13 @@ namespace BenefitsPac.Service.Implementations
         {
             try
             {
-                decimal discount = dependent.DependentName.StartsWith("a", StringComparison.OrdinalIgnoreCase) ? .10m : 0;
-                return await dependentsRepository.Create(new DependentDataModel(dependent, discount));
+                if (dependent != null)
+                {
+                    decimal discount = dependent.DependentName?.StartsWith("a", StringComparison.OrdinalIgnoreCase) == true ? .10m : 0;
+                    return await dependentsRepository.Create(new DependentDataModel(dependent, discount));
+                }
+
+                return 0;
             }
             catch (Exception ex)
             {
@@ -39,8 +44,13 @@ namespace BenefitsPac.Service.Implementations
         {
             try
             {
-                IEnumerable<DependentDataModel> dependentDataModels = await dependentsRepository.GetByEmployeeId(id);
-                return dependentDataModels.Select(x => new DependentModel(x)).OrderByDescending(x => x.DependentId);
+                if (id > 0)
+                {
+                    IEnumerable<DependentDataModel> dependentDataModels = await dependentsRepository.GetByEmployeeId(id);
+                    return dependentDataModels.Select(x => new DependentModel(x)).OrderByDescending(x => x.DependentId);
+                }
+
+                return null;
             }
             catch (Exception ex)
             {

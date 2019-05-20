@@ -6,6 +6,6 @@ namespace BenefitsPac.Business.Abstractions
 {
     public interface IBenefitsBreakdown
     {
-        BenefitsBreakdownModel GetBenefitsBreaksown(EmployeeSalaryDataModel employeeModel, IEnumerable<BenefitCostDataModel> benefitDeductionModel);
+        BenefitsBreakdownModel GetBenefitsBreaksown(EmployeeSalaryDataModel employeeSalaryDataModel, IEnumerable<BenefitCostDataModel> benefitDeductionModels);
     }
 }

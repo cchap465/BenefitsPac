@@ -12,9 +12,9 @@ namespace BenefitsPac.Core.Models.DomainModels
 
         public DependentModel(DependentDataModel dependent)
         {
-            EmployeeId = dependent.EmployeeId;
-            DependentId = dependent.DependentId;
-            DependentName = dependent.DependentName;
+            EmployeeId = dependent?.EmployeeId ?? 0;
+            DependentId = dependent?.DependentId ?? 0;
+            DependentName = dependent?.DependentName ?? string.Empty;
         }
     }
 }

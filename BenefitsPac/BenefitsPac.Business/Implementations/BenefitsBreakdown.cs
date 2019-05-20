@@ -7,25 +7,28 @@ namespace BenefitsPac.Business
 {
     public class BenefitsBreakdown : IBenefitsBreakdown
     {
-        public BenefitsBreakdownModel GetBenefitsBreaksown(EmployeeSalaryDataModel employeeModel, IEnumerable<BenefitCostDataModel> benefitDeductionModel)
+        public BenefitsBreakdownModel GetBenefitsBreaksown(EmployeeSalaryDataModel employeeSalaryDataModel, 
+            IEnumerable<BenefitCostDataModel> benefitDeductionModels)
         {
-            decimal yearlyBenefitsCost = GetYearlyTotal(employeeModel, benefitDeductionModel);
+            if (employeeSalaryDataModel == null || benefitDeductionModels == null) return null;
+
+            decimal yearlyBenefitsCost = GetYearlyTotal(benefitDeductionModels);
 
             return new BenefitsBreakdownModel()
             {
                 BenefitsCostPerYear = yearlyBenefitsCost,
-                BenefitsCostPerPayPeriod = yearlyBenefitsCost / employeeModel.PaymentFrequency,
-                SalaryPerYear = employeeModel.SalaryByPayPeriod * employeeModel.PaymentFrequency,
-                PayPeriodFrequency = GetPaymentFrequencyVerbiage(employeeModel.PaymentFrequency),
-                SalaryPerPayPeriod = employeeModel.SalaryByPayPeriod,
+                BenefitsCostPerPayPeriod = yearlyBenefitsCost / employeeSalaryDataModel.PaymentFrequency,
+                SalaryPerYear = employeeSalaryDataModel.SalaryByPayPeriod * employeeSalaryDataModel.PaymentFrequency,
+                PayPeriodFrequency = GetPaymentFrequencyVerbiage(employeeSalaryDataModel.PaymentFrequency),
+                SalaryPerPayPeriod = employeeSalaryDataModel.SalaryByPayPeriod,
             };
         }
 
-        private decimal GetYearlyTotal(EmployeeSalaryDataModel employeeModel, IEnumerable<BenefitCostDataModel> benefitDeductionModel)
+        private decimal GetYearlyTotal(IEnumerable<BenefitCostDataModel> benefitDeductionModels)
         {
             decimal totalYearlyCost = 0.00m;
 
-            foreach (var b in benefitDeductionModel)
+            foreach (var b in benefitDeductionModels)
             {
                 totalYearlyCost += (b.BaseDeductionCost - (b.DiscountAmount * b.BaseDeductionCost));
             }

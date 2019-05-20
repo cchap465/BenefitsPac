@@ -11,8 +11,8 @@ namespace BenefitsPac.Core.Models.DomainModels
 
         public EmployeeModel(EmployeeDataModel employee)
         {
-            EmployeeId = employee.EmployeeId;
-            EmployeeName = employee.EmployeeName;
+            EmployeeId = employee?.EmployeeId ?? 0;
+            EmployeeName = employee?.EmployeeName ?? string.Empty;
         }
     }
 }

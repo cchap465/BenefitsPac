@@ -25,8 +25,13 @@ namespace BenefitsPac.Service.Implementations
         {
             try
             {
-                decimal discount = employee.EmployeeName.StartsWith("a", StringComparison.OrdinalIgnoreCase) ? .10m : 0;
-                return await employeeRepository.Create(new EmployeeDataModel(employee, discount));
+                if (employee != null)
+                {
+                    decimal discount = employee.EmployeeName?.StartsWith("a", StringComparison.OrdinalIgnoreCase) == true ? .10m : 0;
+                    return await employeeRepository.Create(new EmployeeDataModel(employee, discount));
+                }
+
+                return 0;
             }
             catch (Exception ex)
             {
@@ -39,7 +44,12 @@ namespace BenefitsPac.Service.Implementations
         {
             try
             {
-                return await employeeRepository.Update(employeeId, employeeName);
+                if (employeeId > 0 && !string.IsNullOrEmpty(employeeName))
+                {
+                    return await employeeRepository.Update(employeeId, employeeName);
+                }
+
+                return 0;
             }
             catch (Exception ex)
             {
@@ -65,8 +75,13 @@ namespace BenefitsPac.Service.Implementations
         {
             try
             {
-                EmployeeDataModel employeeDataModel = await employeeRepository.GetById(id);
-                return new EmployeeModel(employeeDataModel);
+                if (id > 0)
+                {
+                    EmployeeDataModel employeeDataModel = await employeeRepository.GetById(id);
+                    return new EmployeeModel(employeeDataModel);
+                }
+
+                return null;
             }
             catch (Exception ex)
             {

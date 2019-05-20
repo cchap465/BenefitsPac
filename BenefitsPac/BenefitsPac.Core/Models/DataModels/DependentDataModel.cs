@@ -13,9 +13,9 @@ namespace BenefitsPac.Core.Models.DataModels
 
         public DependentDataModel(DependentModel dependentModel, decimal discountAmount)
         {
-            EmployeeId = dependentModel.EmployeeId;
-            DependentId = dependentModel.DependentId;
-            DependentName = dependentModel.DependentName;
+            EmployeeId = dependentModel?.EmployeeId ?? 0;
+            DependentId = dependentModel?.DependentId ?? 0;
+            DependentName = dependentModel?.DependentName ?? string.Empty;
             BenefitCost = new BenefitCostDataModel()
             {
                 IsDependent = true,

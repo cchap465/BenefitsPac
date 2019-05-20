@@ -9,17 +9,17 @@ namespace BenefitsPac.Controllers
     [Route("/api/Employee")]
     public class EmployeeController : ControllerBase
     {
-        private readonly IEmployeeService _employeeService;
+        private readonly IEmployeeService employeeService;
 
         public EmployeeController(IEmployeeService employeeService)
         {
-            _employeeService = employeeService;
+            this.employeeService = employeeService;
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            EmployeeModel employee = await _employeeService.GetById(id);
+            EmployeeModel employee = await employeeService.GetById(id);
 
             return Ok(employee);
         }
@@ -27,7 +27,7 @@ namespace BenefitsPac.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            IEnumerable<object> employees = await _employeeService.GetAll();
+            IEnumerable<object> employees = await employeeService.GetAll();
 
             return Ok(employees);
         }
@@ -35,7 +35,7 @@ namespace BenefitsPac.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] EmployeeModel employee)
         {
-            var returnedId = await _employeeService.Create(employee);
+            var returnedId = await employeeService.Create(employee);
 
             return Ok(returnedId);
         }
@@ -43,7 +43,7 @@ namespace BenefitsPac.Controllers
         [HttpPut("{id}/{name}")]
         public async Task<IActionResult> Update(int id, string name)
         {
-            var returnedId = await _employeeService.UpdateEmployeeName(id, name);
+            var returnedId = await employeeService.UpdateEmployeeName(id, name);
 
             return Ok(returnedId);
         }
@@ -51,7 +51,7 @@ namespace BenefitsPac.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var returnedId = await _employeeService.Delete(id);
+            var returnedId = await employeeService.Delete(id);
 
             return Ok(returnedId);
         }
