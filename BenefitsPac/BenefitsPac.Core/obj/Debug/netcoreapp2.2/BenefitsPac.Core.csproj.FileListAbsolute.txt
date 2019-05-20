@@ -6,4 +6,3 @@ C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Core\obj\Debug\netcoreapp2.2\Benefit
 C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Core\obj\Debug\netcoreapp2.2\BenefitsPac.Core.AssemblyInfo.cs
 C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Core\obj\Debug\netcoreapp2.2\BenefitsPac.Core.dll
 C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Core\obj\Debug\netcoreapp2.2\BenefitsPac.Core.pdb
-C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Core\obj\Debug\netcoreapp2.2\BenefitsPac.Core.csprojAssemblyReference.cache
