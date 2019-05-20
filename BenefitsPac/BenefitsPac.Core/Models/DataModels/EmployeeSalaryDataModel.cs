@@ -2,7 +2,7 @@
 {
     public class EmployeeSalaryDataModel
     {
-        public int PaymentFrequency { get; set; }
-        public decimal SalaryByPayPeriod { get; set; }
+        public int PaymentFrequency => 26;
+        public decimal SalaryByPayPeriod => 2000;
     }
 }
