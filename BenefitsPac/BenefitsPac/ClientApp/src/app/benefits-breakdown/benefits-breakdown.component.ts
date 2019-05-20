@@ -20,9 +20,9 @@ export class BenefitsBreakdownComponent implements OnInit {
 
   getBenefitsBreakdown() {
     const id = +this.route.snapshot.paramMap.get('id');
-      this.benefitsService.getBenefitsBreakDown(id)
-        .subscribe(benefitsBreakdown => {
-          this.benefitsBreakdown = benefitsBreakdown;
+    this.benefitsService.getBenefitsBreakDown(id)
+      .subscribe(benefitsBreakdown => {
+        this.benefitsBreakdown = benefitsBreakdown;
       });
   }
 }

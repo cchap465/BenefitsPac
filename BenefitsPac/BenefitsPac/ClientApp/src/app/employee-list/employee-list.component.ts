@@ -4,12 +4,13 @@ import { Employee } from '../shared/models/employee';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
-  selector: 'app-employee',
-  templateUrl: './employee.component.html',
-  styleUrls: ['./employee.component.scss']
+  selector: 'app-employee-list',
+  templateUrl: './employee-list.component.html',
+  styleUrls: ['./employee-list.component.css']
 })
-
-export class EmployeeComponent implements OnInit {
+export class EmployeeListComponent implements OnInit {
+  filterButtonText = 'Filter Employees';
+  show = false;
   employees: Employee[];
   filteredEmployees: Employee[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -22,22 +23,24 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit() {
     this.getEmployees();
-   }
+    this.cd.markForCheck();
+  }
 
   getEmployees(): void {
     this.employeeService.getEmployees()
-    .subscribe(employees => {
-      this.employees = employees;
-      this.setDataSource();
-    });
+      .subscribe(employees => {
+        this.employees = employees;
+        this.setDataSource();
+        this.cd.markForCheck();
+      });
   }
 
   deleteEmployee(id: number): void {
     this.employeeService.deleteEmployee(id)
-    .subscribe(() => {
-      this.employees = this.employees.filter( h => h.employeeId !== id);
-      this.setDataSource();
-    });
+      .subscribe(() => {
+        this.employees = this.employees.filter(h => h.employeeId !== id);
+        this.setDataSource();
+      });
   }
 
   applyFilter(value: string) {
@@ -47,10 +50,18 @@ export class EmployeeComponent implements OnInit {
     }
   }
 
-  private setDataSource() {
-    this.dataSource = new MatTableDataSource(this.employees);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+  toggle() {
+    this.show = !this.show;
+    if (this.show) {
+      this.filterButtonText = 'Hide Filter';
+    } else {
+      this.filterButtonText = 'Filter Employees';
+    }
   }
 
+  private setDataSource() {
+    this.dataSource = new MatTableDataSource(this.employees);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 }

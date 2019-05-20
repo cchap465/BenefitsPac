@@ -5,25 +5,40 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
-import { EmployeeModule } from './employee/employee.module';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { MatTableModule, MatPaginatorModule, MatCardModule } from '@angular/material';
+import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
+import { DependentsComponent } from './dependents/dependents.component';
 import { BenefitsBreakdownComponent } from './benefits-breakdown/benefits-breakdown.component';
+import { EmployeeListComponent } from './employee-list/employee-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
+    EmployeeDetailsComponent,
+    DependentsComponent,
+    BenefitsBreakdownComponent,
+    EmployeeListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     AppRoutingModule,
     FormsModule,
-    EmployeeModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    RouterModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatCardModule
   ],
-  providers: [],
+  providers: [Location],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

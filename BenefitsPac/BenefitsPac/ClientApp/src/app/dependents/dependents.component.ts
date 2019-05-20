@@ -26,22 +26,23 @@ export class DependentsComponent implements OnInit {
     this.getDependents();
   }
 
-  getDependents():void {
+  getDependents(): void {
     this.dependentsService.getDependentsByEmployeeId(this.employeeId)
       .subscribe(dependents => {
         this.dependents = dependents;
         this.dependent.employeeId = this.employeeId;
         this.setTableData();
-    });
+      });
   }
 
   addDependent(): void {
     this.dependentsService.addDependent(this.dependent)
       .subscribe(dependentId => {
-        this.dependents.push({ 
-          dependentId: dependentId, 
-          dependentName: this.dependent.dependentName, 
-          employeeId: this.employeeId })
+        this.dependents.push({
+          dependentId: dependentId,
+          dependentName: this.dependent.dependentName,
+          employeeId: this.employeeId
+        });
         this.setTableData();
       });
   }
@@ -49,7 +50,7 @@ export class DependentsComponent implements OnInit {
   deleteDependent(id: number): void {
     this.dependentsService.deleteDependent(id)
       .subscribe(() => {
-        this.dependents = this.dependents.filter( h => h.dependentId !== id);
+        this.dependents = this.dependents.filter(h => h.dependentId !== id);
         this.setTableData();
       });
   }

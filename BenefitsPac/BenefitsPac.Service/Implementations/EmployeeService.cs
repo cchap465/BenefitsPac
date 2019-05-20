@@ -76,7 +76,7 @@ namespace BenefitsPac.Service
             try
             {
                 IEnumerable<EmployeeDataModel> employeeDataModels = await employeeRepository.GetAll();
-                return employeeDataModels.Select(x => new EmployeeModel(x));
+                return employeeDataModels.Select(x => new EmployeeModel(x)).OrderByDescending(x => x.EmployeeId);
             }
             catch (Exception ex)
             {

@@ -1,8 +1,0 @@
-<mat-card>
-<h1>{{ header }}</h1>
-<input placeholder="Please enter employee name" matInput [(ngModel)]="employee.employeeName" class="form-control" type="text"/>
-<button (click)="saveEmployee(employee.employeeName)">Save</button>
-<br/>
-<br/>
-<app-dependents *ngIf="!employee.employeeId==0"></app-dependents>
-</mat-card>

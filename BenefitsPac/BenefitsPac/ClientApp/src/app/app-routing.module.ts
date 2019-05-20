@@ -1,14 +1,14 @@
 import { BenefitsBreakdownComponent } from './benefits-breakdown/benefits-breakdown.component';
-import { EmployeeComponent } from './employee/employee.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { EmployeeDetailsComponent } from './employee/employee-details/employee-details.component';
+import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
+import { EmployeeListComponent } from './employee-list/employee-list.component';
 
 const routes: Routes = [
-  { path: 'employees', component: EmployeeComponent },
-  { path: 'employeeDetail/:id', component: EmployeeDetailsComponent},
-  { path: 'benefitsBreakdown/:id', component: BenefitsBreakdownComponent},
-  { path: '', redirectTo: '/employees', pathMatch: 'full' },
+  { path: 'Home', component: EmployeeListComponent },
+  { path: 'EmployeeDetail/:id', component: EmployeeDetailsComponent },
+  { path: 'BenefitsBreakdown/:id', component: BenefitsBreakdownComponent },
+  { path: '', redirectTo: '/Home', pathMatch: 'full' },
 ];
 
 @NgModule({

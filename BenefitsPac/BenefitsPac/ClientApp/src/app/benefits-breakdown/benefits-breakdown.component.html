@@ -1,7 +1,7 @@
 <!-- Codes by HTML.am -->
 
 <!-- CSS Code -->
-<style type="text/css" scoped>
+<!-- <style type="text/css" scoped>
   .GeneratedText {
     font-family: Baskerville, serif;
     font-size: 1em;
@@ -16,26 +16,26 @@
     text-align: right;
   }
 
-</style>
+</style> -->
 
 <!-- HTML Code -->
 <mat-card>
-  <h3 class="GeneratedText">
+  <h3>
     Benefits Breakdown for Employee:
   </h3>
-  <div class="labelText">
+  <div>
     <label>Pay Period Frequency:</label> {{benefitsBreakdown.payPeriodFrequency}}
     <mat-card>
-            <label>Yearly Salary:</label> {{benefitsBreakdown.salaryPerYear | currency:'USD' }}
-            <br/>
-            <label>Yearly Benefits Cost:</label> {{benefitsBreakdown.benefitsCostPerYear | currency:'USD' }}        
+      <label>Yearly Salary:</label> {{benefitsBreakdown.salaryPerYear | currency:'USD' }}
+      <br />
+      <label>Yearly Benefits Cost:</label> {{benefitsBreakdown.benefitsCostPerYear | currency:'USD' }}
     </mat-card>
-    <br/>
+    <br />
     <mat-card>
-    <label>Salary By Pay Period:</label> {{benefitsBreakdown.salaryPerPayPeriod | currency:'USD' }}
-    <br/>
-    <label>Benefits Cost By Pay Period:</label> {{benefitsBreakdown.benefitsCostPerPayPeriod | currency:'USD' }}
+      <label>Salary By Pay Period:</label> {{benefitsBreakdown.salaryPerPayPeriod | currency:'USD' }}
+      <br />
+      <label>Benefits Cost By Pay Period:</label> {{benefitsBreakdown.benefitsCostPerPayPeriod | currency:'USD' }}
     </mat-card>
-    <br/>
+    <br />
   </div>
 </mat-card>

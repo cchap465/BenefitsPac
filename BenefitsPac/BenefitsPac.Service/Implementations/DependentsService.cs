@@ -37,7 +37,7 @@ namespace BenefitsPac.Service
             try
             {
                 IEnumerable<DependentDataModel> dependentDataModels = await _dependentsRepository.GetByEmployeeId(id);
-                return dependentDataModels.Select(x => new DependentModel(x));
+                return dependentDataModels.Select(x => new DependentModel(x)).OrderByDescending(x => x.DependentId);
             }
             catch (System.Exception ex)
             {

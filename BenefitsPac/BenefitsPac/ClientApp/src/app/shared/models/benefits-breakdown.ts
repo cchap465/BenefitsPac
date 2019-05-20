@@ -3,5 +3,5 @@ export class BenefitsBreakdown {
   salaryPerPayPeriod: number;
   benefitsCostPerYear: number;
   benefitsCostPerPayPeriod: number;
-  payPeriodFrequency : string;
-  }
+  payPeriodFrequency: string;
+}
