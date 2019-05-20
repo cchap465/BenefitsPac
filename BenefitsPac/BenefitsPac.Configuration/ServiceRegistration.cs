@@ -10,10 +10,10 @@ namespace BenefitsPac.Configuration
         {
             var Assemblies = new[]
             {
-                Assembly.Load("OviApi"),
-                Assembly.Load("OviApi.DataAccess"),
-                Assembly.Load("OviApi.Manufacture"),
-                Assembly.Load("OviApi.Transport")
+                Assembly.Load("BenefitsPac"),
+                Assembly.Load("BenefitsPac.DataAccess"),
+                Assembly.Load("BenefitsPac.Business"),
+                Assembly.Load("BenefitsPac.Service")
             };
 
             foreach (var assembly in Assemblies)

@@ -1,4 +1,5 @@
 ﻿using BenefitsPac.Core.Models;
+using BenefitsPac.DataAccess.Abstractions;
 using Dapper;
 using Microsoft.Extensions.Options;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BenefitsPac.DataAccess.Implementations
 {
-    public class LoggerRepository
+    public class LoggerRepository : ILoggerRepository
     {
         private ConnectionStrings connectionStrings;
 
