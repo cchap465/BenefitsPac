@@ -13,8 +13,8 @@ namespace BenefitsPac.Core.Models.DataModels
 
         public EmployeeDataModel(EmployeeModel employeeModel, decimal discountAmount)
         {
-            EmployeeId = employeeModel.EmployeeId;
-            EmployeeName = employeeModel.EmployeeName;
+            EmployeeId = employeeModel?.EmployeeId ?? 0;
+            EmployeeName = employeeModel?.EmployeeName ?? string.Empty;
             BenefitCost = new BenefitCostDataModel()
             {
                 IsEmployee = true,

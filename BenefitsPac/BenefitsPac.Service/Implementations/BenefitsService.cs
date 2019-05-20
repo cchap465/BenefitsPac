@@ -33,10 +33,15 @@ namespace BenefitsPac.Service.Implementations
         {
             try
             {
-                IEnumerable<BenefitCostDataModel> benefitCostDataModels = await benefitsRepository.GetBenefitsCostsByEmployeeId(employeeId);
-                EmployeeSalaryDataModel employeeSalaryDataModel = await employeeRepository.GetEmployeeSalaryData(employeeId);
+                if (employeeId > 0)
+                {
+                    IEnumerable<BenefitCostDataModel> benefitCostDataModels = await benefitsRepository.GetBenefitsCostsByEmployeeId(employeeId);
+                    EmployeeSalaryDataModel employeeSalaryDataModel = await employeeRepository.GetEmployeeSalaryData(employeeId);
 
-                return benefitsBreakdown.GetBenefitsBreaksown(employeeSalaryDataModel, benefitCostDataModels);
+                    return benefitsBreakdown.GetBenefitsBreaksown(employeeSalaryDataModel, benefitCostDataModels);
+                }
+
+                return null;
             }
             catch (Exception ex)
             {
