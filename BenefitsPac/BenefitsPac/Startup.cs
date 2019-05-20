@@ -1,3 +1,5 @@
+using BenefitsPac.Configuration;
+using BenefitsPac.Core.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +21,9 @@ namespace BenefitsPac
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            new ServiceRegistration().ConfigureProjectServices(services);
+            services.Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             // In production, the Angular files will be served from this directory

@@ -1,32 +1,65 @@
-﻿using BenefitsPac.Core.DataAccessAbstractions;
-using BenefitsPac.Core.ServiceAbstractions;
+using BenefitsPac.Core.Models.DataModels;
+using BenefitsPac.Core.Models.DomainModels;
+using BenefitsPac.DataAccess.Abstractions;
+using BenefitsPac.Service.Abstractions;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
-namespace BenefitsPac.Service
+namespace BenefitsPac.Service.Implementations
 {
     public class DependentsService : IDependentsService
     {
-        private readonly IDependentsRepository _dependentsRepository;
+        private readonly IDependentsRepository dependentsRepository;
+        private readonly ILoggerRepository loggerRepository;
 
-        public DependentsService(IDependentsRepository dependentsRepository)
+        public DependentsService(IDependentsRepository dependentsRepository,
+            ILoggerRepository loggerRepository)
         {
-            _dependentsRepository = dependentsRepository;
+            this.dependentsRepository = dependentsRepository;
+            this.loggerRepository = loggerRepository;
         }
 
-        public async Task<int> Create(object dependent)
+        public async Task<int> Create(DependentModel dependent)
         {
-            return await _dependentsRepository.Create(dependent);
+            try
+            {
+                decimal discount = dependent.DependentName.StartsWith("a", StringComparison.OrdinalIgnoreCase) ? .10m : 0;
+                return await dependentsRepository.Create(new DependentDataModel(dependent, discount));
+            }
+            catch (Exception ex)
+            {
+                await loggerRepository.Log(ex).ConfigureAwait(false);
+                throw;
+            }
         }
 
-        public async Task<object> GetById(int id)
+        public async Task<IEnumerable<DependentModel>> GetByEmployeeId(int id)
         {
-            return await _dependentsRepository.GetById(id);
+            try
+            {
+                IEnumerable<DependentDataModel> dependentDataModels = await dependentsRepository.GetByEmployeeId(id);
+                return dependentDataModels.Select(x => new DependentModel(x)).OrderByDescending(x => x.DependentId);
+            }
+            catch (Exception ex)
+            {
+                await loggerRepository.Log(ex).ConfigureAwait(false);
+                throw;
+            }
         }
 
-        public async Task<IEnumerable<object>> GetByEmployeeId(int id)
+        public async Task<int> Delete(int id)
         {
-            return await _dependentsRepository.GetByEmployeeId(id);
+            try
+            {
+                return await dependentsRepository.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                await loggerRepository.Log(ex).ConfigureAwait(false);
+                throw;
+            }
         }
     }
 }

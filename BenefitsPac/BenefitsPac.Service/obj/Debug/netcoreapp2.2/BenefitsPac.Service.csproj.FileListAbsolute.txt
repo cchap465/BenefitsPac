@@ -4,3 +4,13 @@ C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\obj\Debug\netcoreapp2.2\Bene
 C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\obj\Debug\netcoreapp2.2\BenefitsPac.Service.csproj.CoreCompileInputs.cache
 C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\obj\Debug\netcoreapp2.2\BenefitsPac.Service.AssemblyInfoInputs.cache
 C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\obj\Debug\netcoreapp2.2\BenefitsPac.Service.AssemblyInfo.cs
+C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\bin\Debug\netcoreapp2.2\BenefitsPac.Service.deps.json
+C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\bin\Debug\netcoreapp2.2\BenefitsPac.Service.dll
+C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\bin\Debug\netcoreapp2.2\BenefitsPac.Service.pdb
+C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\bin\Debug\netcoreapp2.2\BenefitsPac.Core.pdb
+C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\bin\Debug\netcoreapp2.2\BenefitsPac.DataAccess.pdb
+C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\obj\Debug\netcoreapp2.2\BenefitsPac.Service.csproj.CopyComplete
+C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\obj\Debug\netcoreapp2.2\BenefitsPac.Service.dll
+C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\obj\Debug\netcoreapp2.2\BenefitsPac.Service.pdb
+C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\bin\Debug\netcoreapp2.2\BenefitsPac.Business.dll
+C:\Repo\BenefitsPac\BenefitsPac\BenefitsPac.Service\bin\Debug\netcoreapp2.2\BenefitsPac.Business.pdb

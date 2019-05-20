@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BenefitsPac.Business\BenefitsPac.Business.csproj" />
     <ProjectReference Include="..\BenefitsPac.Core\BenefitsPac.Core.csproj" />
     <ProjectReference Include="..\BenefitsPac.DataAccess\BenefitsPac.DataAccess.csproj" />
   </ItemGroup>

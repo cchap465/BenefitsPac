@@ -1,0 +1,20 @@
+<mat-card>
+  <h3>
+    Benefits Breakdown for Employee:
+  </h3>
+  <div>
+    <label>Pay Period Frequency:</label> {{benefitsBreakdown.payPeriodFrequency}}
+    <mat-card>
+      <label>Yearly Salary:</label> {{benefitsBreakdown.salaryPerYear | currency:'USD' }}
+      <br />
+      <label>Yearly Benefits Cost:</label> {{benefitsBreakdown.benefitsCostPerYear | currency:'USD' }}
+    </mat-card>
+    <br />
+    <mat-card>
+      <label>Salary By Pay Period:</label> {{benefitsBreakdown.salaryPerPayPeriod | currency:'USD' }}
+      <br />
+      <label>Benefits Cost By Pay Period:</label> {{benefitsBreakdown.benefitsCostPerPayPeriod | currency:'USD' }}
+    </mat-card>
+    <br />
+  </div>
+</mat-card>
