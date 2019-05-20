@@ -1,8 +1,8 @@
-﻿using BenefitsPac.Core.Models.ApiModel;
+using BenefitsPac.Core.Models.DomainModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BenefitsPac.Core.ServiceAbstractions
+namespace BenefitsPac.Service.Abstractions
 {
     public interface IDependentsService
     {

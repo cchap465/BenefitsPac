@@ -1,19 +1,9 @@
-using BenefitsPac.Business;
-using BenefitsPac.Business.Abstractions;
-using BenefitsPac.Core.DataAccessAbstractions;
+using BenefitsPac.Configuration;
 using BenefitsPac.Core.Models;
-using BenefitsPac.Core.ServiceAbstractions;
-using BenefitsPac.DataAccess;
-using BenefitsPac.DataAccess.Abstractions;
-using BenefitsPac.DataAccess.Implementations;
-using BenefitsPac.Service;
-using BenefitsPac.Service.Abstractions;
-using BenefitsPac.Service.Implementations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -31,16 +21,7 @@ namespace BenefitsPac
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IDependentsRepository, DependentsRepository>();
-            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-            services.AddScoped<IBenefitsRepository, BenefitsRepository>();
-
-            services.AddScoped<IDependentsService, DependentsService>();
-            services.AddScoped<IEmployeeService, EmployeeService>();
-            services.AddScoped<IBenefitsService, BenefitsService>();
-
-            services.AddScoped<IBenefitsBreakdown, BenefitsBreakdown>();
-
+            new ServiceRegistration().ConfigureProjectServices(services);
             services.Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

@@ -23,7 +23,6 @@ export class EmployeeListComponent implements OnInit {
 
   ngOnInit() {
     this.getEmployees();
-    this.cd.markForCheck();
   }
 
   getEmployees(): void {
@@ -53,10 +52,11 @@ export class EmployeeListComponent implements OnInit {
   toggle() {
     this.show = !this.show;
     if (this.show) {
-      this.filterButtonText = 'Hide Filter';
+      this.filterButtonText = 'Remove Filter';
     } else {
       this.filterButtonText = 'Filter Employees';
     }
+    this.setDataSource();
   }
 
   private setDataSource() {

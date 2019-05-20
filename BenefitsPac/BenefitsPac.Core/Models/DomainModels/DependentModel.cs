@@ -1,4 +1,6 @@
-﻿namespace BenefitsPac.Core.Models.ApiModel
+﻿using BenefitsPac.Core.Models.DataModels;
+
+namespace BenefitsPac.Core.Models.DomainModels
 {
     public class DependentModel
     {

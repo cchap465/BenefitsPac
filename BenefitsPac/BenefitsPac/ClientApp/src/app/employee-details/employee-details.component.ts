@@ -1,7 +1,7 @@
 import { EmployeeService } from '../shared/services/employee.service';
 import { Component, OnInit } from '@angular/core';
 import { Employee } from 'src/app/shared/models/employee';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 @Component({
@@ -14,6 +14,7 @@ export class EmployeeDetailsComponent implements OnInit {
   header = 'Add New Employee';
 
   constructor(private route: ActivatedRoute,
+    private router: Router,
     private employeeService: EmployeeService,
     private location: Location) { }
 
@@ -40,8 +41,9 @@ export class EmployeeDetailsComponent implements OnInit {
         .subscribe();
     } else {
       this.employeeService.createEmployee(this.employee)
-        .subscribe();
-      this.location.back();
+        .subscribe(() => {
+          this.router.navigate(['/Home']);
+        });
     }
   }
 }

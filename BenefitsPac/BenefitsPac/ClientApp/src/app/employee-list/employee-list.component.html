@@ -5,7 +5,7 @@
   </button>
   <br />
   <br />
-  <input *ngIf="show" [hidden]="!paginator?.length > 0" placeholder="Begin typing to filter list" matInput #input
+  <input *ngIf="show" placeholder="Begin typing to filter list" matInput #input
     class="form-control" type="text" (keyup)="applyFilter($event.target.value)" />
   <mat-table #table [dataSource]="dataSource" matSort [hidden]="paginator.length == 0">
     <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>

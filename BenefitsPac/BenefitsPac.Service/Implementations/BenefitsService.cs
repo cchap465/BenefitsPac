@@ -1,6 +1,5 @@
 ﻿using BenefitsPac.Business.Abstractions;
-using BenefitsPac.Core.DataAccessAbstractions;
-using BenefitsPac.Core.Models;
+using BenefitsPac.Core.Models.DataModels;
 using BenefitsPac.Core.Models.DomainModels;
 using BenefitsPac.DataAccess.Abstractions;
 using BenefitsPac.Service.Abstractions;
@@ -15,14 +14,17 @@ namespace BenefitsPac.Service.Implementations
         private readonly IBenefitsBreakdown benefitsBreakdown;
         private readonly IEmployeeRepository employeeRepository;
         private readonly IBenefitsRepository benefitsRepository;
+        private readonly ILoggerRepository loggerRepository;
 
         public BenefitsService(IBenefitsBreakdown benefitsBreakdown,
             IEmployeeRepository employeeRepository,
-            IBenefitsRepository benefitsRepository)
+            IBenefitsRepository benefitsRepository,
+            ILoggerRepository loggerRepository)
         {
             this.benefitsBreakdown = benefitsBreakdown;
             this.employeeRepository = employeeRepository;
             this.benefitsRepository = benefitsRepository;
+            this.loggerRepository = loggerRepository;
         }
 
         public IBenefitsBreakdown BenefitsBreakdown { get; }
@@ -38,7 +40,7 @@ namespace BenefitsPac.Service.Implementations
             }
             catch (Exception ex)
             {
-
+                await loggerRepository.Log(ex).ConfigureAwait(false);
                 throw;
             }
         }

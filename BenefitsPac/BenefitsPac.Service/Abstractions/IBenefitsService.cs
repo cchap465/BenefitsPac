@@ -1,4 +1,4 @@
-﻿using BenefitsPac.Core.Models.DomainModels;
+using BenefitsPac.Core.Models.DomainModels;
 using System.Threading.Tasks;
 
 namespace BenefitsPac.Service.Abstractions

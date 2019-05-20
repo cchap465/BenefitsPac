@@ -1,4 +1,4 @@
-﻿using BenefitsPac.Core.Models;
+﻿using BenefitsPac.Core.Models.DataModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

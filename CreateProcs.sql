@@ -194,3 +194,22 @@ BEGIN
 	WHERE EmployeeId = @EmployeeId
 END
 GO
+
+--ExceptionLogs
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
+	WHERE ROUTINE_NAME = 'CreateExceptionLog')
+	DROP PROCEDURE CreateExceptionLog
+GO
+
+CREATE PROCEDURE CreateExceptionLog (
+	@ExceptionDateTime DATEtIME,
+	@PageOfOrigin VARCHAR(255),
+	@CallStack VARCHAR(1000),
+	@ExceptionMessage VARCHAR(1000)
+	)
+	as
+BEGIN	
+	INSERT INTO ExceptionLogs(ExceptionDateTime, PageOfOrigin, CallStack, ExceptionMessage)
+	VALUES(@ExceptionDateTime, @PageOfOrigin, @CallStack, @ExceptionMessage)
+END
+GO

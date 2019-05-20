@@ -1,21 +1,24 @@
-﻿using BenefitsPac.Core.DataAccessAbstractions;
-using BenefitsPac.Core.Models;
-using BenefitsPac.Core.Models.ApiModel;
-using BenefitsPac.Core.ServiceAbstractions;
+using BenefitsPac.Core.Models.DataModels;
+using BenefitsPac.Core.Models.DomainModels;
+using BenefitsPac.DataAccess.Abstractions;
+using BenefitsPac.Service.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BenefitsPac.Service
+namespace BenefitsPac.Service.Implementations
 {
     public class DependentsService : IDependentsService
     {
-        private readonly IDependentsRepository _dependentsRepository;
+        private readonly IDependentsRepository dependentsRepository;
+        private readonly ILoggerRepository loggerRepository;
 
-        public DependentsService(IDependentsRepository dependentsRepository)
+        public DependentsService(IDependentsRepository dependentsRepository,
+            ILoggerRepository loggerRepository)
         {
-            _dependentsRepository = dependentsRepository;
+            this.dependentsRepository = dependentsRepository;
+            this.loggerRepository = loggerRepository;
         }
 
         public async Task<int> Create(DependentModel dependent)
@@ -23,11 +26,11 @@ namespace BenefitsPac.Service
             try
             {
                 decimal discount = dependent.DependentName.StartsWith("a", StringComparison.OrdinalIgnoreCase) ? .10m : 0;
-                return await _dependentsRepository.Create(new DependentDataModel(dependent, discount));
+                return await dependentsRepository.Create(new DependentDataModel(dependent, discount));
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-
+                await loggerRepository.Log(ex).ConfigureAwait(false);
                 throw;
             }
         }
@@ -36,12 +39,12 @@ namespace BenefitsPac.Service
         {
             try
             {
-                IEnumerable<DependentDataModel> dependentDataModels = await _dependentsRepository.GetByEmployeeId(id);
+                IEnumerable<DependentDataModel> dependentDataModels = await dependentsRepository.GetByEmployeeId(id);
                 return dependentDataModels.Select(x => new DependentModel(x)).OrderByDescending(x => x.DependentId);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-
+                await loggerRepository.Log(ex).ConfigureAwait(false);
                 throw;
             }
         }
@@ -50,11 +53,11 @@ namespace BenefitsPac.Service
         {
             try
             {
-                return await _dependentsRepository.Delete(id);
+                return await dependentsRepository.Delete(id);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-
+                await loggerRepository.Log(ex).ConfigureAwait(false);
                 throw;
             }
         }

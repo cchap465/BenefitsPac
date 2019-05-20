@@ -16,6 +16,7 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
+    <PackageReference Include="StructureMap" Version="4.7.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BenefitsPac.Configuration\BenefitsPac.Configuration.csproj" />
     <ProjectReference Include="..\BenefitsPac.Core\BenefitsPac.Core.csproj" />
     <ProjectReference Include="..\BenefitsPac.Service\BenefitsPac.Service.csproj" />
   </ItemGroup>

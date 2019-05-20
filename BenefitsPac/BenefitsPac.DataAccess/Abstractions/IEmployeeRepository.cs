@@ -1,8 +1,8 @@
-﻿using BenefitsPac.Core.Models;
+﻿using BenefitsPac.Core.Models.DataModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BenefitsPac.Core.DataAccessAbstractions
+namespace BenefitsPac.DataAccess.Abstractions
 {
     public interface IEmployeeRepository
     {

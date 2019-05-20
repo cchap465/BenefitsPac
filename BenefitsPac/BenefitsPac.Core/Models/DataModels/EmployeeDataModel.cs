@@ -1,6 +1,6 @@
-﻿using BenefitsPac.Core.Models.ApiModel;
+﻿using BenefitsPac.Core.Models.DomainModels;
 
-namespace BenefitsPac.Core.Models
+namespace BenefitsPac.Core.Models.DataModels
 {
     public class EmployeeDataModel
     {

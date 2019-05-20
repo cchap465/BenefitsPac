@@ -14,6 +14,10 @@ USE BenefitsPac
 GO
 
 --Dropping tables if they exist
+IF EXISTS(SELECT * FROM sys.tables WHERE name='ExceptionLogs')
+	DROP TABLE ExceptionLogs
+GO
+
 IF EXISTS(SELECT * FROM sys.tables WHERE name='BenefitCosts')
 	DROP TABLE BenefitCosts
 GO
@@ -68,6 +72,16 @@ CREATE TABLE BenefitCosts(
 	CONSTRAINT PK_BenefitCosts_Id PRIMARY KEY (Id),
 	CONSTRAINT FK_BenefitCosts_EmployeeId FOREIGN KEY (EmployeeId) REFERENCES Employees(EmployeeId),
 	CONSTRAINT FK_BenefitCosts_DependentId FOREIGN KEY (DependentId) REFERENCES Dependents(DependentId),
+)
+GO
+
+CREATE TABLE ExceptionLogs(
+	Id INT NOT NULL IDENTITY(1,1),
+	ExceptionDateTime DATETIME NOT NULL,
+	PageOfOrigin VARCHAR(255),
+	CallStack VARCHAR(1000) NOT NULL,
+	ExceptionMessage VARCHAR(1000) NOT NULL
+	CONSTRAINT PK_ExceptionLogs_Id PRIMARY KEY (Id),
 )
 GO
 

@@ -1,5 +1,5 @@
-﻿using BenefitsPac.Core.Models.ApiModel;
-using BenefitsPac.Core.ServiceAbstractions;
+﻿using BenefitsPac.Core.Models.DomainModels;
+using BenefitsPac.Service.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;

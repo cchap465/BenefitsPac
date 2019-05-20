@@ -1,21 +1,24 @@
-﻿using BenefitsPac.Core.DataAccessAbstractions;
-using BenefitsPac.Core.Models;
-using BenefitsPac.Core.Models.ApiModel;
-using BenefitsPac.Core.ServiceAbstractions;
+using BenefitsPac.Core.Models.DataModels;
+using BenefitsPac.Core.Models.DomainModels;
+using BenefitsPac.DataAccess.Abstractions;
+using BenefitsPac.Service.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BenefitsPac.Service
+namespace BenefitsPac.Service.Implementations
 {
     public class EmployeeService : IEmployeeService
     {
         private readonly IEmployeeRepository employeeRepository;
+        private readonly ILoggerRepository loggerRepository;
 
-        public EmployeeService(IEmployeeRepository employeeRepository)
+        public EmployeeService(IEmployeeRepository employeeRepository,
+            ILoggerRepository loggerRepository)
         {
             this.employeeRepository = employeeRepository;
+            this.loggerRepository = loggerRepository;
         }
 
         public async Task<int> Create(EmployeeModel employee)
@@ -27,6 +30,7 @@ namespace BenefitsPac.Service
             }
             catch (Exception ex)
             {
+                await loggerRepository.Log(ex).ConfigureAwait(false);
                 throw;
             }
         }
@@ -37,9 +41,9 @@ namespace BenefitsPac.Service
             {
                 return await employeeRepository.Update(employeeId, employeeName);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                await loggerRepository.Log(ex).ConfigureAwait(false);
                 throw;
             }
         }
@@ -52,7 +56,7 @@ namespace BenefitsPac.Service
             }
             catch (Exception ex)
             {
-
+                await loggerRepository.Log(ex).ConfigureAwait(false);
                 throw;
             }
         }
@@ -66,7 +70,7 @@ namespace BenefitsPac.Service
             }
             catch (Exception ex)
             {
-
+                await loggerRepository.Log(ex).ConfigureAwait(false);
                 throw;
             }
         }
@@ -80,7 +84,7 @@ namespace BenefitsPac.Service
             }
             catch (Exception ex)
             {
-
+                await loggerRepository.Log(ex).ConfigureAwait(false);
                 throw;
             }
         }

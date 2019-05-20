@@ -1,5 +1,6 @@
-﻿using BenefitsPac.Core.DataAccessAbstractions;
-using BenefitsPac.Core.Models;
+﻿using BenefitsPac.Core.Models;
+using BenefitsPac.Core.Models.DataModels;
+using BenefitsPac.DataAccess.Abstractions;
 using Dapper;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;

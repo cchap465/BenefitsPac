@@ -1,4 +1,4 @@
-﻿namespace BenefitsPac.Core.Models
+namespace BenefitsPac.Core.Models
 {
     public class ConnectionStrings
     {
